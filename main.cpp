@@ -1,5 +1,12 @@
 #include "HelperFunctions.h"
 
+/**
+ * \brief Main
+ *
+ * @param argc
+ * @param argv
+ * @return
+ */
 int main (int argc, char** argv)
 {
 	if (argc < 2 || pcl::console::find_switch (argc, argv, "--help"))
