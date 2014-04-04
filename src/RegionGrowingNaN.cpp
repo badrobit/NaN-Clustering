@@ -108,7 +108,7 @@ pcl::RegionGrowingNaN<PointT, NormalT>::prepareForSegmentation ()
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 template <typename PointT, typename NormalT> void
 pcl::RegionGrowingNaN<PointT, NormalT>::findPointNeighbours()
-{l
+{
 	int point_number = static_cast<int>( indices_->size() );
 	std::vector<int> neighbours;
 	std::vector<float> distances;

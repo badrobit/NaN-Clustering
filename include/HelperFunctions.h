@@ -12,12 +12,28 @@
 #include <pcl/console/parse.h>
 #include <pcl/console/print.h>
 
+#include <pcl/features/integral_image_normal.h>
+
+
 /**
  *
  */
 enum file_type{ PCD, PLY, BOTH };
 
+/**
+* \typedef PointT
+* \brief Have all points in the project represented by pcl::PointXYZRGB
+* */
+typedef pcl::PointXYZRGB PointT;
 
+/**
+* \typedef PointCloud
+* \brief Have all pointclouds used in the project made up from \ref PointT
+*
+* \details This representation is used to save time and type matching errors while passing around
+* and working with point clouds.
+*/
+typedef pcl::PointCloud<PointT> PointCloud;
 
 /**
  * \brief Reads PointCloud data in from a file.
