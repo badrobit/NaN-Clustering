@@ -13,7 +13,7 @@ LINK_DIRECTORIES(${PCL_LIBRARY_DIRS})
 ADD_DEFINITIONS(${PCL_DEFINITIONS})
 
 #.....: Libraries .................................................................................:
-add_library( HelperFunctions src/HelperFunctions.cpp )
+ADD_LIBRARY( HelperFunctions src/HelperFunctions.cpp )
 TARGET_LINK_LIBRARIES( HelperFunctions ${PCL_LIBRARIES} )
 
 ADD_LIBRARY( NaNClusterComparator include/NaNClusterComparator.h )
