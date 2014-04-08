@@ -4,10 +4,6 @@ compiler:
 env:
   matrix:
     - TASK="build"
-
-matrix:
-  include:
-    - env: TASK="doc"
 before_install:
   - sudo add-apt-repository ppa:v-launchpad-jochen-sprickerhof-de/pcl -y
   - sudo add-apt-repository ppa:apokluda/boost1.53 -y
