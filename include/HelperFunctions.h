@@ -24,7 +24,7 @@ enum file_type{ PCD, PLY, BOTH };
 * \typedef PointT
 * \brief Have all points in the project represented by pcl::PointXYZRGB
 * */
-typedef pcl::PointXYZRGB PointT;
+typedef pcl::PointXYZRGBA PointT;
 
 /**
 * \typedef PointCloud

@@ -30,7 +30,7 @@ int SaveToFile( PointCloud input_cloud, std::string file_name, file_type type )
 	if( type == PCD )
 	{
 		pcl::io::savePLYFileASCII( file_name + ".pcd", input_cloud );
-		std::cout << "Saved " << input_cloud.size() << " datapoints to " << file_name << ".ply" << std::endl;
+		std::cout << "Saved " << input_cloud.size() << " datapoints to " << file_name << ".pcd" << std::endl;
 		return true;
 	}
 	else if( type == PLY )

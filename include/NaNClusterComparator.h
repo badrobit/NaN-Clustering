@@ -73,11 +73,7 @@ namespace pcl
 			/**
 			 * \brief Empty constructor for NaNClusterComparator.
 			 */
-			NaNClusterComparator() : normals_ (), 
-									 angular_threshold_ (0.0f),
-							         distance_threshold_ (0.005f),
-							         depth_dependent_(),
-							         z_axis_()
+			NaNClusterComparator()
 			{
 			}
 
@@ -92,54 +88,14 @@ namespace pcl
 			 */
 			virtual void setInputCloud( const PointCloudConstPtr& cloud )
 			{
-				input_ = cloud;
-				Eigen::Matrix3f rot = input_->sensor_orientation_.toRotationMatrix();
-				z_axis_ = rot.col( 2 );
-			}
-
-			/**
-			 * \brief Provide a pointer to the input normals.
-			 * \param[in] Normals for the input point cloud.
-			 */
-			inline void setInputNormals( const PointCloudNConstPtr &normals )
-			{
-				normals_ = normals;
-			}
-
-
-			/**
-			 * \brief Set the tolerance in radians for difference in normal direction between neighboring points, to be considered part of the same plane.
-			 * \param[in] angular_threshold the tolerance in radians
-			 */
-			virtual inline void setAngularThreshold( float angular_threshold )
-			{
-				angular_threshold_ = cosf (angular_threshold);
-			}
-
-			/**
-			 * \brief Get the angular threshold in radians for difference in normal direction between neighboring points, to be considered part of the same plane.
-			 */
-			inline float getAngularThreshold() const
-			{
-				return acos(angular_threshold_);
-			}
-
-			/**
-			 * \brief Set the tolerance in meters for difference in perpendicular distance (d component of plane equation) to the plane between neighboring points, to be considered part of the same plane.
-			 * \param[in] distance_threshold the tolerance in meters
-			 */
-			inline void setDistanceThreshold( float distance_threshold, bool depth_dependent )
-			{
-				distance_threshold_ = distance_threshold;
-				depth_dependent_ = depth_dependent;
-			}
-
-			/**
-			 * \brief Get the distance threshold in meters (d component of plane equation) between neighboring points, to be considered part of the same plane.
-			 */
-			inline float getDistanceThreshold() const
-			{
-				return (distance_threshold_);
+				if( !cloud->is_dense )
+				{
+					input_ = cloud;	
+				}
+				else
+				{
+					std::cerr << "You must provide a point cloud that contains NaN values." << std::endl; 
+				}				
 			}
 
 			/**
@@ -151,27 +107,15 @@ namespace pcl
 				labels_ = labels;
 			}
 
-			/**
-			 * \brief Set labels in the label cloud to exclude.
-			 * \param exclude_labels a vector of bools corresponding to whether or not a given label should be considered
-			 */
-			void setExcludeLabels( std::vector<bool>& exclude_labels )
-			{
-				exclude_labels_ = boost::make_shared<std::vector<bool> >(exclude_labels);
-			}
 
-			/**
-			 * \brief Compare points at two indices by their plane equations. True if the angle between the normals is less than the angular threshold,
-			 * and the difference between the d component of the normals is less than distance threshold, else false
-			 * \param[in] idx1 The first index for the comparison
-			 * \param[in] idx2 The second index for the comparison
-			 */
 			virtual bool compare( int idx1, int idx2 ) const
 			{
 				bool pt1_is_nan, pt2_is_nan = false;  
+				//std::cout << "I'm being called!\n"; 
 
 				if( !pcl_isfinite( input_->points[ idx1 ].x ) || !pcl_isfinite( input_->points[ idx1 ].y ) || !pcl_isfinite( input_->points[ idx1 ].z ) )
 				{
+					std::cout << "Pt1 is NaN!\n"; 
 					pt1_is_nan = true; 
 				}
 				if( !pcl_isfinite( input_->points[ idx2 ].x ) || !pcl_isfinite( input_->points[ idx2 ].y ) || !pcl_isfinite( input_->points[ idx2 ].z ) )
@@ -181,6 +125,7 @@ namespace pcl
 
 				if( pt1_is_nan && pt2_is_nan )
 				{
+					std::cout << "Pt1 & Pt2 are NaN Neighbors!\n"; 
 					return true; 
 				}
 				else
@@ -194,10 +139,6 @@ namespace pcl
 			PointCloudLPtr labels_;
 
 			boost::shared_ptr<std::vector<bool> > exclude_labels_;
-			float angular_threshold_;
-			float distance_threshold_;
-			bool depth_dependent_;
-			Eigen::Vector3f z_axis_;
 	};
 }
 #endif // PCL_SEGMENTATION_NAN_CLUSTER_COMPARATOR_H_
