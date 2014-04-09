@@ -12,5 +12,7 @@ before_install:
   - sudo apt-get update -d
 install:
   - sudo apt-get install cmake libvtk5-qt4-dev libflann-dev libeigen3-dev libopenni-dev libqhull-dev libboost-filesystem1.53-dev libboost-iostreams1.53-dev libboost-thread1.53-dev
+before_script:
+  - cmake .
 script:
-  - bash .travis.sh
+  - make 
