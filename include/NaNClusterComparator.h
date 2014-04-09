@@ -115,7 +115,7 @@ namespace pcl
 
 				if( !pcl_isfinite( input_->points[ idx1 ].x ) || !pcl_isfinite( input_->points[ idx1 ].y ) || !pcl_isfinite( input_->points[ idx1 ].z ) )
 				{
-					std::cout << "Pt1 is NaN!\n"; 
+					//std::cout << "Pt1 is NaN!\n"; 
 					pt1_is_nan = true; 
 				}
 				if( !pcl_isfinite( input_->points[ idx2 ].x ) || !pcl_isfinite( input_->points[ idx2 ].y ) || !pcl_isfinite( input_->points[ idx2 ].z ) )
@@ -125,7 +125,7 @@ namespace pcl
 
 				if( pt1_is_nan && pt2_is_nan )
 				{
-					std::cout << "Pt1 & Pt2 are NaN Neighbors!\n"; 
+					//std::cout << "Pt1 & Pt2 are NaN Neighbors!\n"; 
 					return true; 
 				}
 				else

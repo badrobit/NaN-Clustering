@@ -3,10 +3,15 @@ PROJECT( NaN-Clustering )
 
 SET( EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin )
 SET( LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib )
+ADD_DEFINITIONS(
+    -std=c++11 # Or -std=c++0x
+    # Other flags
+)
 
 #.....: PCL Stuff .................................................................................:
-#SET( PCL_DIR "${HOME}/pcl-trunk/PCLConfig.cmake" )
-FIND_PACKAGE( PCL 1.7 REQUIRED )
+SET( PCL_DIR "${HOME}/pcl/build/PCLConfig.cmake" )
+FIND_PACKAGE( PCL 1.7 REQUIRED PATHS "${HOME}/pcl/build/PCLConfig.cmake" )
+FIND_PACKAGE( OpenCV REQUIRED )
 INCLUDE_DIRECTORIES( ${PCL_INCLUDE_DIRS} 
                      ${PROJECT_SOURCE_DIR}/include )
 LINK_DIRECTORIES(${PCL_LIBRARY_DIRS})
@@ -22,4 +27,4 @@ TARGET_LINK_LIBRARIES( NaNClusterComparator ${PCL_LIBRARIES} )
 
 #.....: Executable ................................................................................:
 ADD_EXECUTABLE( NaNClusteringDemo test/NaNClusteringDemo.cpp )
-TARGET_LINK_LIBRARIES( NaNClusteringDemo NaNClusterComparator HelperFunctions )
+TARGET_LINK_LIBRARIES( NaNClusteringDemo NaNClusterComparator HelperFunctions ${OpenCV_LIBS} )
