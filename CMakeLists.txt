@@ -1,6 +1,7 @@
 CMAKE_MINIMUM_REQUIRED( VERSION 2.8 FATAL_ERROR )
 PROJECT( NaN-Clustering )
 
+
 SET( EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin )
 SET( LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib )
 ADD_DEFINITIONS(
@@ -8,10 +9,13 @@ ADD_DEFINITIONS(
     # Other flags
 )
 
+#.....: OpenCV ....................................................................................:
+FIND_PACKAGE( OpenCV REQUIRED )
+
 #.....: PCL Stuff .................................................................................:
 SET( PCL_DIR "${HOME}/pcl/build/PCLConfig.cmake" )
 FIND_PACKAGE( PCL 1.7 REQUIRED PATHS "${HOME}/pcl/build/PCLConfig.cmake" )
-FIND_PACKAGE( OpenCV REQUIRED )
+
 INCLUDE_DIRECTORIES( ${PCL_INCLUDE_DIRS} 
                      ${PROJECT_SOURCE_DIR}/include )
 LINK_DIRECTORIES(${PCL_LIBRARY_DIRS})
