@@ -1,20 +1,14 @@
 CMAKE_MINIMUM_REQUIRED( VERSION 2.8 FATAL_ERROR )
 PROJECT( NaN-Clustering )
 
-
-SET( EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin )
-SET( LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib )
 ADD_DEFINITIONS(
     -std=c++11 # Or -std=c++0x
     # Other flags
 )
 
-#.....: OpenCV ....................................................................................:
-FIND_PACKAGE( OpenCV REQUIRED )
-
 #.....: PCL Stuff .................................................................................:
-SET( PCL_DIR "${HOME}/pcl/build/PCLConfig.cmake" )
-FIND_PACKAGE( PCL 1.7 REQUIRED PATHS "${HOME}/pcl/build/PCLConfig.cmake" )
+SET( PCL_DIR "${HOME}/pcl-trunk/build/PCLConfig.cmake" )
+FIND_PACKAGE( PCL 1.7 REQUIRED PATHS "${HOME}/pcl-trunk/build/PCLConfig.cmake" )
 
 INCLUDE_DIRECTORIES( ${PCL_INCLUDE_DIRS} 
                      ${PROJECT_SOURCE_DIR}/include )
@@ -23,6 +17,7 @@ ADD_DEFINITIONS(${PCL_DEFINITIONS})
 
 #.....: Libraries .................................................................................:
 ADD_LIBRARY( HelperFunctions src/HelperFunctions.cpp )
+SET_TARGET_PROPERTIES( HelperFunctions PROPERTIES LINKER_LANGUAGE CXX )
 TARGET_LINK_LIBRARIES( HelperFunctions ${PCL_LIBRARIES} )
 
 ADD_LIBRARY( NaNClusterComparator include/NaNClusterComparator.h )
@@ -31,4 +26,4 @@ TARGET_LINK_LIBRARIES( NaNClusterComparator ${PCL_LIBRARIES} )
 
 #.....: Executable ................................................................................:
 ADD_EXECUTABLE( NaNClusteringDemo test/NaNClusteringDemo.cpp )
-TARGET_LINK_LIBRARIES( NaNClusteringDemo NaNClusterComparator HelperFunctions ${OpenCV_LIBS} )
+TARGET_LINK_LIBRARIES( NaNClusteringDemo NaNClusterComparator HelperFunctions )
