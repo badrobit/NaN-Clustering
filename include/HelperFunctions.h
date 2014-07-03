@@ -1,19 +1,8 @@
 #ifndef HELPERFUNCTIONS_H_
 #define HELPERFUNCTIONS_H_
 
-#include <string>
-#include <iostream>
-
 #include <pcl/io/pcd_io.h>
 #include <pcl/io/ply_io.h>
-
-#include <pcl/point_types.h>
-
-#include <pcl/console/parse.h>
-#include <pcl/console/print.h>
-
-#include <pcl/features/integral_image_normal.h>
-
 
 /**
  *

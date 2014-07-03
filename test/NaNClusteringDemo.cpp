@@ -1,38 +1,12 @@
 #include <NaNClusterComparator.h>
 #include <HelperFunctions.h>
 
-#include <pcl/visualization/cloud_viewer.h>
-#include <pcl/visualization/pcl_visualizer.h>
-
-#include <iostream>
-#include <string>
-
-#include <pcl/point_types.h>
-#include <pcl/ModelCoefficients.h>
-#include <pcl/filters/project_inliers.h>
-
-#include <pcl/point_cloud.h>
-
-#include <pcl/filters/extract_indices.h>
-#include <pcl/filters/voxel_grid.h>
-
 #include <pcl/io/png_io.h>
 #include <pcl/io/openni_grabber.h>
-#include <pcl/io/oni_grabber.h>
-#include <pcl/io/pcd_grabber.h>
 
 #include <pcl/common/time.h>
-#include <pcl/common/transforms.h>
-
-#include <pcl/features/integral_image_normal.h>
-
-//#include <pcl/segmentation/organized_multi_plane_segmentation.h>
-//#include <pcl/segmentation/planar_polygon_fusion.h>
-#include <pcl/segmentation/plane_coefficient_comparator.h>
-#include <pcl/segmentation/euclidean_plane_coefficient_comparator.h>
-#include <pcl/segmentation/rgb_plane_coefficient_comparator.h>
-//#include <pcl/segmentation/edge_aware_plane_comparator.h>
-#include <pcl/segmentation/euclidean_cluster_comparator.h>
+#include <pcl/filters/project_inliers.h>
+#include <pcl/visualization/cloud_viewer.h>
 #include <pcl/segmentation/organized_connected_component_segmentation.h>
 
 #define SHOW_FPS 1
@@ -100,7 +74,6 @@ class SimpleOpenNIViewer
 
          uint8_t r = 255, g = 0, b = 0;    // Example: Red color
          uint32_t rgb = ((uint32_t)r << 16 | (uint32_t)g << 8 | (uint32_t)b);
-         //pcl::io::savePCDFileASCII( "test01.pcd", *cloud );
 
          //std::cerr << "PointCloud Width: " << cloud->width << " PointCloud Height: " << cloud->height << "\n"; 
          //std::cerr << "PointCloud is Organized: " << cloud->isOrganized() << std::endl; 
